@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using bodyshedule.Data;
 
@@ -11,9 +12,11 @@ using bodyshedule.Data;
 namespace bodyshedule.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240629193542_test11")]
+    partial class test11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,18 +41,18 @@ namespace bodyshedule.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IdentityRole", (string)null);
+                    b.ToTable("IdentityRole");
 
                     b.HasData(
                         new
                         {
-                            Id = "bcab4201-8cbc-494d-85a7-bf282b6d775d",
+                            Id = "51faf5c3-9e28-4f34-8f46-a738eba5bdc4",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "1becab83-1192-4d71-aa02-2b37869cf89d",
+                            Id = "94d7d1e0-938a-4f32-b2ee-183f2fd71c45",
                             Name = "user",
                             NormalizedName = "user"
                         });
@@ -304,7 +307,7 @@ namespace bodyshedule.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Events", (string)null);
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("bodyshedule.Models.ExerciseItem", b =>
@@ -332,7 +335,7 @@ namespace bodyshedule.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("ExerciseItems", (string)null);
+                    b.ToTable("ExerciseItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

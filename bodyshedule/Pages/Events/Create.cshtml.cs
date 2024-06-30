@@ -36,9 +36,23 @@ namespace bodyshedule.Pages.Events
         public async Task<IActionResult> OnPostAsync(IFormCollection form)
         {
             var user = await _userManager.GetUserAsync(User);
-            _dal.CreateEvent(form, user);
+            var itemsList = new List<ExerciseItem>();
+            int itemCount = 1;
+            while (form.ContainsKey($"ExerciseItem.{itemCount}.Title"))
+            {
+                itemsList.Add(new ExerciseItem
+                {
+                    Title = form[$"ExerciseItem.{itemCount}.Title"].ToString(),
+                    QuantityApproaches = int.Parse(form[$"ExerciseItem.{itemCount}.QuantityApproaches"]),
+                    QuantityRepetions = int.Parse(form[$"ExerciseItem.{itemCount}.QuantityRepetions"])
+                });
+                itemCount++;
+            }
+
+            _dal.CreateEvent(form, user, itemsList);
 
             return RedirectToPage("./Index");
         }
+
     }
 }

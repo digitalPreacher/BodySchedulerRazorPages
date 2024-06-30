@@ -14,12 +14,9 @@ namespace bodyshedule.Data
         public List<Event> GetEvents();
         public List<Event> GetMyEvents(int userid);
         public Task<Event> GetEvent(int id);
-        public void CreateEvent(IFormCollection form, ApplicationUser appUser);
+        public void CreateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
         public void UpdateEvent(IFormCollection form, ApplicationUser appUser);
         public void DeleteEvent(int id);
-        public List<Location> GetLocations();
-        public Location GetLocation(int id);
-        public void CreateLocation(Location location);
     }
 
     public class DAL : IDAL
@@ -47,20 +44,18 @@ namespace bodyshedule.Data
             return _db.Events.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void CreateEvent(IFormCollection form, ApplicationUser autUser)
+        public void CreateEvent(IFormCollection form, ApplicationUser autUser, List<ExerciseItem> itemList)
         {
             var user = _db.Users.FirstOrDefault(x => x.Id == autUser.Id);
-            var newEvent = new Event(form, user);
+            var newEvent = new Event(form, user, itemList);
             _db.Events.Add(newEvent);
             _db.SaveChanges();
         }
 
         public void UpdateEvent(IFormCollection form, ApplicationUser autUser)
         {
-            //var locationName = form["Location"].ToString();
             var eventId = int.Parse(form["Event.id"]);
             var myEvent = _db.Events.FirstOrDefault(x => x.Id == eventId);
-            //var location = _db.Locations.FirstOrDefault(x => x.name == locationName);
             var userId = form["user_id"];
             var user = _db.Users.FirstOrDefault(x => x.Id == autUser.Id);
             myEvent.UpdateEvent(form, user);
@@ -71,24 +66,9 @@ namespace bodyshedule.Data
         public void DeleteEvent(int id)
         {
             var myEvent = _db.Events.Find(id);
+            var deleteItems = _db.ExerciseItems.Where(item => item.EventId  == id);
+            _db.ExerciseItems.RemoveRange(deleteItems);
             _db.Events.Remove(myEvent);
-            _db.SaveChanges();
-        }
-
-        public List<Location> GetLocations()
-        {
-            return _db.Locations.ToList();
-        }
-
-        public Location GetLocation(int id)
-        {
-            return _db.Locations.Find(id);
-        }
-
-
-        public void CreateLocation(Location location)
-        {
-            _db.Locations.Add(location);
             _db.SaveChanges();
         }
 

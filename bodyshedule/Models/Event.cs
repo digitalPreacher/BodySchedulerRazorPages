@@ -1,4 +1,5 @@
 ﻿using bodyshedule.Data;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System.ComponentModel.DataAnnotations;
 
 namespace bodyshedule.Models
@@ -12,17 +13,17 @@ namespace bodyshedule.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
-        //public virtual Location Location { get; set; }  
+        public ICollection<ExerciseItem> Items { get; set; } = new List<ExerciseItem>();
         public virtual ApplicationUser User { get; set; }
 
-        public Event(IFormCollection form, ApplicationUser user)
+        public Event(IFormCollection form, ApplicationUser user, ICollection<ExerciseItem> itemList)
         {
             User = user;
+            Items = itemList;
             Name = form["Event.name"].ToString();
             Description = form["Event.description"].ToString();
             StartTime = DateTime.Parse(form["Event.StartTime"].ToString());
             EndTime = DateTime.Parse(form["Event.EndTime"].ToString());
-            //Location = location;
         }
 
         public void UpdateEvent(IFormCollection form, ApplicationUser user) //Location location
@@ -32,7 +33,6 @@ namespace bodyshedule.Models
             Description = form["Event.description"].ToString();
             StartTime = DateTime.Parse(form["Event.StartTime"].ToString());
             EndTime = DateTime.Parse(form["Event.EndTime"].ToString());
-            //Location = location;
         }
 
         public Event()

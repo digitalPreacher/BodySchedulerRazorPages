@@ -7,28 +7,28 @@
 namespace bodyshedule.Migrations
 {
     /// <inheritdoc />
-    public partial class deleteLocationFromEventModel : Migration
+    public partial class test8 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
                 table: "IdentityRole",
-                keyColumn: "id",
-                keyValue: "6d174e4f-f0ad-4a7e-bca4-847e1c7d0ea8");
+                keyColumn: "Id",
+                keyValue: "9da68ce1-97c4-4890-8bcc-f1f64e2667fe");
 
             migrationBuilder.DeleteData(
                 table: "IdentityRole",
-                keyColumn: "id",
-                keyValue: "ef18932b-592c-4feb-9118-50eaae41f769");
+                keyColumn: "Id",
+                keyValue: "f787e32e-ca3d-4eb7-a247-1ae90e68ae97");
 
             migrationBuilder.InsertData(
                 table: "IdentityRole",
-                columns: new[] { "id", "ConcurrencyStamp", "name", "NormalizedName" },
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "537722a4-35ad-4b56-adde-8a0f452c6b8e", null, "user", "user" },
-                    { "dcbb7e19-81cd-4add-91a3-22883146c525", null, "admin", "admin" }
+                    { "aa404b1c-e605-4698-8a20-fc00edb75f34", null, "admin", "admin" },
+                    { "ce5c57fe-cfe8-44e5-b29c-930b2d9a6faa", null, "user", "user" }
                 });
         }
 
@@ -37,21 +37,21 @@ namespace bodyshedule.Migrations
         {
             migrationBuilder.DeleteData(
                 table: "IdentityRole",
-                keyColumn: "id",
-                keyValue: "537722a4-35ad-4b56-adde-8a0f452c6b8e");
+                keyColumn: "Id",
+                keyValue: "aa404b1c-e605-4698-8a20-fc00edb75f34");
 
             migrationBuilder.DeleteData(
                 table: "IdentityRole",
-                keyColumn: "id",
-                keyValue: "dcbb7e19-81cd-4add-91a3-22883146c525");
+                keyColumn: "Id",
+                keyValue: "ce5c57fe-cfe8-44e5-b29c-930b2d9a6faa");
 
             migrationBuilder.InsertData(
                 table: "IdentityRole",
-                columns: new[] { "id", "ConcurrencyStamp", "name", "NormalizedName" },
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6d174e4f-f0ad-4a7e-bca4-847e1c7d0ea8", null, "admin", "admin" },
-                    { "ef18932b-592c-4feb-9118-50eaae41f769", null, "user", "user" }
+                    { "9da68ce1-97c4-4890-8bcc-f1f64e2667fe", null, "admin", "admin" },
+                    { "f787e32e-ca3d-4eb7-a247-1ae90e68ae97", null, "user", "user" }
                 });
         }
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using bodyshedule.Data;
 
@@ -11,9 +12,11 @@ using bodyshedule.Data;
 namespace bodyshedule.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240629192318_test9")]
+    partial class test9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,18 +41,18 @@ namespace bodyshedule.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IdentityRole", (string)null);
+                    b.ToTable("IdentityRole");
 
                     b.HasData(
                         new
                         {
-                            Id = "bcab4201-8cbc-494d-85a7-bf282b6d775d",
+                            Id = "aad8b562-8da5-41fa-a7e9-cba1e630084e",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "1becab83-1192-4d71-aa02-2b37869cf89d",
+                            Id = "6ff01c9c-9b34-4d2f-a89f-d9f9acb3a97e",
                             Name = "user",
                             NormalizedName = "user"
                         });
@@ -304,7 +307,7 @@ namespace bodyshedule.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Events", (string)null);
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("bodyshedule.Models.ExerciseItem", b =>
@@ -315,7 +318,7 @@ namespace bodyshedule.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("EventId")
+                    b.Property<int>("EventsId")
                         .HasColumnType("int");
 
                     b.Property<int>("QuantityApproaches")
@@ -330,9 +333,9 @@ namespace bodyshedule.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+                    b.HasIndex("EventsId");
 
-                    b.ToTable("ExerciseItems", (string)null);
+                    b.ToTable("ExerciseItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -399,9 +402,13 @@ namespace bodyshedule.Migrations
 
             modelBuilder.Entity("bodyshedule.Models.ExerciseItem", b =>
                 {
-                    b.HasOne("bodyshedule.Models.Event", null)
+                    b.HasOne("bodyshedule.Models.Event", "Events")
                         .WithMany("Items")
-                        .HasForeignKey("EventId");
+                        .HasForeignKey("EventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("bodyshedule.Models.Event", b =>

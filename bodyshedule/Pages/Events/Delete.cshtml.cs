@@ -26,7 +26,7 @@ namespace bodyshedule.Pages.Events
         }
 
         [BindProperty]
-      public Event Event { get; set; } = default!;
+        public Event Event { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

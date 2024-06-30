@@ -27,6 +27,7 @@ namespace bodyshedule.Data
         }
 
         public DbSet<Event> Events { get; set; }
-        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<ExerciseItem> ExerciseItems { get; set; }
     }
 }

@@ -34,6 +34,24 @@
                 <input asp-for="Event.EndTime" class="form-control" />
                 <span asp-validation-for="Event.EndTime" class="text-danger"></span>
             </div>
+            @foreach ((var item, int index) in Model.Event.Items.Select((item, index)=> (item, index)))
+            {
+                <div class="form-group">
+                    <label asp-for="@item.Title" class="control-label"></label>
+                    <input asp-for="@item.Title" name="@($"ExerciseItem.{index}.Title")" class="form-control" />
+                    <span asp-validation-for="@item.Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@item.QuantityApproaches" class="control-label"></label>
+                    <input asp-for="@item.QuantityApproaches" name="@($"ExerciseItem.{index}.QuantityApproaches")" class="form-control" />
+                    <span asp-validation-for="@item.QuantityApproaches" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@item.QuantityRepetions" class="control-label"></label>
+                    <input asp-for="@item.QuantityRepetions" name="@($"ExerciseItem.{index}.QuantityRepetions")" class="form-control" />
+                    <span asp-validation-for="@item.Title" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

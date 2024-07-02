@@ -41,8 +41,7 @@ namespace bodyshedule.Data
 
         public Task<Event> GetEvent(int id)
         {
-            
-            return _db.Events.Include(x => x.Items).FirstOrDefaultAsync(x => x.Id == id);
+            return _db.Events.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public void CreateEvent(IFormCollection form, ApplicationUser autUser, List<ExerciseItem> itemList)

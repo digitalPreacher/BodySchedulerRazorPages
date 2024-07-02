@@ -9,6 +9,7 @@ using bodyshedule.Data;
 using bodyshedule.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using NuGet.Protocol;
 
 namespace bodyshedule.Pages.Events
 {

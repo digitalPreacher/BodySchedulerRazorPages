@@ -26,9 +26,10 @@ namespace bodyshedule.Models
             EndTime = DateTime.Parse(form["Event.EndTime"].ToString());
         }
 
-        public void UpdateEvent(IFormCollection form, ApplicationUser user) //Location location
+        public void UpdateEvent(IFormCollection form, ApplicationUser user, ICollection<ExerciseItem> itemList) //Location location
         {
             User = user;
+            Items = itemList;
             Name = form["Event.name"].ToString();
             Description = form["Event.description"].ToString();
             StartTime = DateTime.Parse(form["Event.StartTime"].ToString());

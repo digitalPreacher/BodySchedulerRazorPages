@@ -15,7 +15,7 @@ namespace bodyshedule.Data
         public List<Event> GetMyEvents(int userid);
         public Task<Event> GetEvent(int id);
         public void CreateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
-        public void UpdateEvent(IFormCollection form, ApplicationUser appUser);
+        public void UpdateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
         public void DeleteEvent(int id);
     }
 
@@ -53,13 +53,13 @@ namespace bodyshedule.Data
             _db.SaveChanges();
         }
 
-        public void UpdateEvent(IFormCollection form, ApplicationUser autUser)
+        public void UpdateEvent(IFormCollection form, ApplicationUser autUser, List<ExerciseItem> itemList)
         {
             var eventId = int.Parse(form["Event.id"]);
-            var myEvent = _db.Events.FirstOrDefault(x => x.Id == eventId);
+            var myEvent = _db.Events.Include(x => x.Items).FirstOrDefault(x => x.Id == eventId);
             var userId = form["user_id"];
             var user = _db.Users.FirstOrDefault(x => x.Id == autUser.Id);
-            myEvent.UpdateEvent(form, user);
+            myEvent.UpdateEvent(form, user, itemList);
             _db.Entry(myEvent).State = EntityState.Modified;
             _db.SaveChanges();
         }

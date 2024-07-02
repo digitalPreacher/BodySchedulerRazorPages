@@ -52,10 +52,22 @@ namespace bodyshedule.Pages.Events
         public async Task<IActionResult> OnPostAsync(IFormCollection form)
         {
             var user = await _userManager.GetUserAsync(User);
-            //var @event = await _dal.GetEvent(int.Parse(form["Event.id"]));
+            
             try
             {
-                _dal.UpdateEvent(form, user);
+                var itemsList = new List<ExerciseItem>();
+                int itemCount = 0;
+                while (form.ContainsKey($"ExerciseItem.{itemCount}.Title"))
+                {
+                    itemsList.Add(new ExerciseItem
+                    {
+                        Title = form[$"ExerciseItem.{itemCount}.Title"].ToString(),
+                        QuantityApproaches = int.Parse(form[$"ExerciseItem.{itemCount}.QuantityApproaches"]),
+                        QuantityRepetions = int.Parse(form[$"ExerciseItem.{itemCount}.QuantityRepetions"])
+                    });
+                    itemCount++;
+                }
+                _dal.UpdateEvent(form, user, itemsList);
                 TempData["Aler"] = "Success! You modified an getEvent for: " + form["Event.name"];
                 return RedirectToPage("./Index");
             }
@@ -63,7 +75,7 @@ namespace bodyshedule.Pages.Events
             {
                 ViewData["Alert"] = "An error occurred: " + ex.Message;
             }
-            //Event = @event;
+
             return Page();
 
         }

@@ -35,6 +35,41 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Event.EndTime)
         </dd>
+        @if(Model.Event.Items?.Any() ?? false)
+        {
+            @foreach (var item in Model.Event.Items)
+            {
+                <dt class="col-sm-2">
+                    Title
+                </dt>
+                <dd class="col-sm-10">
+                    @item.Title
+                </dd>
+                <dt class="col-sm-2">
+                    QuantityApproaches
+                </dt>
+                <dd class="col-sm-10">
+                    @item.QuantityApproaches
+                </dd>
+                <dt class="col-sm-2">
+                    QuantityRepetions
+                </dt>
+                <dd class="col-sm-10">
+                    @item.QuantityRepetions
+                </dd>
+            }
+
+        }
+        else 
+        {
+            <dd>null exercise</dd>
+        }
+        @*     @for (int i = 0; i < Model.Event.Items.Count; i++)
+        {
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Items)
+            </dd>
+        } *@
     </dl>
 </div>
 <div>

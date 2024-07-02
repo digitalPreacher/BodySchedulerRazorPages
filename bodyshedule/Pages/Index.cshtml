@@ -15,6 +15,12 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 events: eventJson,
+                eventClick: function (info) {
+                    var eventId = info.event.id;
+                    var redirectUrl = "/Events/Details?id=" + eventId;
+                    
+                    window.location.href = redirectUrl;
+                }
             });
             calendar.render();
         }); 

@@ -5,48 +5,55 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Event.Name" class="control-label"></label>
-                <input asp-for="Event.Name" class="form-control" />
-                <span asp-validation-for="Event.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Event.Description" class="control-label"></label>
-                <input asp-for="Event.Description" class="form-control" />
-                <span asp-validation-for="Event.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Event.StartTime" class="control-label"></label>
-                <input asp-for="Event.StartTime" class="form-control" />
-                <span asp-validation-for="Event.StartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Event.EndTime" class="control-label"></label>
-                <input asp-for="Event.EndTime" class="form-control" />
-                <span asp-validation-for="Event.EndTime" class="text-danger"></span>
-            </div>
-            <div id="exerciseItemsContainer">
-            </div>
-            <button type="button" onclick="addExerciseItem()">Add Exercise</button>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="col-lg-8 mx-auto text-center rounded border p-3">
+        <h1>Добавление тренировки</h1>
     </div>
 </div>
 
-
-<div>
-    <a asp-page="Index">Back to List</a>
+<div class="container">
+    <div class="col-lg-8 mx-auto rounded border p-3">
+            <form method="post">
+                <div class="row text-center">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Event.Name" class="control-label">Название</label>
+                        <input asp-for="Event.Name" class="form-control" />
+                        <span asp-validation-for="Event.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="Event.StartTime" class="control-label">Начало</label>
+                        <input asp-for="Event.StartTime" class="form-control" />
+                        <span asp-validation-for="Event.StartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="Event.EndTime" class="control-label">Завершение</label>
+                        <input asp-for="Event.EndTime" class="form-control" />
+                        <span asp-validation-for="Event.EndTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="Event.Description" class="control-label">Описание</label>
+                        <input asp-for="Event.Description" class="form-control" />
+                        <span asp-validation-for="Event.Description" class="text-danger"></span>
+                    </div>
+                    <div id="exerciseItemsContainer">
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <button type="button" onclick="addExerciseItem()" class="w-100 btn btn-lg btn-primary">Добавить упражнение</button>
+                </div>
+                <div>
+                    <div class="d-grid gap-2">
+                        <input type="submit" value="Добавить" class="w-100 btn btn-lg mt-2 btn-success" />
+                    </div>
+                </div>
+            </form>
+            <button onclick="window.history.back()" class="btn mt-2 btn-primary"><i class="bi bi-reply"></i>Назад</button>
+        </div>
 </div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -56,20 +63,24 @@
             var itemCount = container.children().length + 1; // Get current count
 
             var newItem = `
-              <div class="exercise-item">
-                <div class="form-group">
-                  <label>Exercise ${itemCount} Title:</label>
-                  <input type="text" name="ExerciseItem.${itemCount}.Title" />
-                </div>
-                <div class="form-group">
-                  <label>Exercise ${itemCount} QuantityApproaches:</label>
-                  <input type="number" name="ExerciseItem.${itemCount}.QuantityApproaches" />
-                </div>
-                 <div class="form-group">
-                  <label>Exercise ${itemCount} QuantityRepetions:</label>
-                  <input type="number" name="ExerciseItem.${itemCount}.QuantityRepetions" />
-                </div>
-                <button type="button" onclick="$(this).parent().remove()">Remove Exercise</button>
+              <div class="exercise-item row">
+                    <div class="form-group col-md-6">
+                        <label>Упражнение:</label>
+                        <input type="text" name="ExerciseItem.${itemCount}.Title" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Подходы:</label>
+                        <input type="number" name="ExerciseItem.${itemCount}.QuantityApproaches" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Повторения:</label>
+                        <input type="number" name="ExerciseItem.${itemCount}.QuantityRepetions" class="form-control"/>
+                    </div>
+                    <div class="col-md-2">
+                            <button type="button" onclick="$(this).parent().parent().remove()" class="btn mt-4 btn-danger float-right">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
               </div>`;
 
             container.append(newItem);

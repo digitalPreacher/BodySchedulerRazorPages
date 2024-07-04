@@ -5,31 +5,35 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
+
+<div class="container">
+
+    <h1 class="text-center">Мои тренировки</h1>
+    <div>
+        <a asp-page="Create" class="btn btn-primary">Добавить</a>
+        <a asp-page="../Index" class="btn mx-2 btn-primary float-end"><i class="bi bi-reply"></i>Назад</a>
+    </div>
+    <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Name)
+                Название
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Description)
+                Описание
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].StartTime)
+                Начало
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].EndTime)
+                Завершение
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Event) {
+    @foreach (var item in Model.Event) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -44,11 +48,12 @@
                 @Html.DisplayFor(modelItem => item.EndTime)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i></a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
-}
+    }
     </tbody>
-</table>
+    </table>
+</div>

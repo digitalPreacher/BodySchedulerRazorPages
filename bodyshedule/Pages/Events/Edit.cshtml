@@ -5,62 +5,95 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Event</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Event.Id" />
-            <div class="form-group">
-                <label asp-for="Event.Name" class="control-label"></label>
-                <input asp-for="Event.Name" class="form-control" />
-                <span asp-validation-for="Event.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Event.Description" class="control-label"></label>
-                <input asp-for="Event.Description" class="form-control" />
-                <span asp-validation-for="Event.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Event.StartTime" class="control-label"></label>
-                <input asp-for="Event.StartTime" class="form-control" />
-                <span asp-validation-for="Event.StartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Event.EndTime" class="control-label"></label>
-                <input asp-for="Event.EndTime" class="form-control" />
-                <span asp-validation-for="Event.EndTime" class="text-danger"></span>
-            </div>
-            @foreach ((var item, int index) in Model.Event.Items.Select((item, index)=> (item, index)))
-            {
-                <div class="form-group">
-                    <label asp-for="@item.Title" class="control-label"></label>
-                    <input asp-for="@item.Title" name="@($"ExerciseItem.{index}.Title")" class="form-control" />
-                    <span asp-validation-for="@item.Title" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@item.QuantityApproaches" class="control-label"></label>
-                    <input asp-for="@item.QuantityApproaches" name="@($"ExerciseItem.{index}.QuantityApproaches")" class="form-control" />
-                    <span asp-validation-for="@item.QuantityApproaches" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@item.QuantityRepetions" class="control-label"></label>
-                    <input asp-for="@item.QuantityRepetions" name="@($"ExerciseItem.{index}.QuantityRepetions")" class="form-control" />
-                    <span asp-validation-for="@item.Title" class="text-danger"></span>
-                </div>
-            }
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="col-lg-8 mx-auto text-center rounded border p-3">
+        <h1>Редактирование тренировки</h1>
     </div>
 </div>
 
+<div class="container">
+    <div class="col-lg-8 mx-auto rounded border p-3">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Event.Id" />
+                <div class="row text-center">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Event.Name" class="control-label">Название</label>
+                        <input asp-for="Event.Name" class="form-control" />
+                        <span asp-validation-for="Event.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="Event.StartTime" class="control-label">Начало</label>
+                        <input asp-for="Event.StartTime" class="form-control" />
+                        <span asp-validation-for="Event.StartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="Event.EndTime" class="control-label">Завершение</label>
+                        <input asp-for="Event.EndTime" class="form-control" />
+                        <span asp-validation-for="Event.EndTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="Event.Description" class="control-label">Описание</label>
+                        <input asp-for="Event.Description" class="form-control" />
+                        <span asp-validation-for="Event.Description" class="text-danger"></span>
+                    </div>
+                </div>
+                @if (Model.Event.Items?.Any() ?? false)
+                {   
+                    <div class="text-center">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Упражнения
+                                    </th>
+                                    <th>
+                                        Подходы
+                                    </th>
+                                    <th>
+                                        Повторения
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ((var item, int index) in Model.Event.Items.Select((item, index) => (item, index)))
+                                {
+                                    <tr>
+
+                                        <td>
+                                            <input asp-for="@item.Title" name="@($"ExerciseItem.{index}.Title")" class="form-control" />
+                                            <span asp-validation-for="@item.Title" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <input asp-for="@item.QuantityApproaches" name="@($"ExerciseItem.{index}.QuantityApproaches")" class="form-control" />
+                                            <span asp-validation-for="@item.QuantityApproaches" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            <input asp-for="@item.QuantityRepetions" name="@($"ExerciseItem.{index}.QuantityRepetions")" class="form-control" />
+                                            <span asp-validation-for="@item.Title" class="text-danger"></span>
+                                        </td>
+
+                                        <td>
+                                            <button type="button" onclick="$(this).parent().parent().remove()" class="btn btn-danger float-right">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                    </table>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="w-100 btn mt-2 btn-primary" />
+                </div>
+            </form>
+        </div>
+</div>
+
 <div>
-    <a asp-page="./Index">Back to List</a>
+     
 </div>
 
 @section Scripts {

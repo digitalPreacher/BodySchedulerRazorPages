@@ -66,18 +66,18 @@
               <div class="exercise-item row">
                     <div class="form-group col-md-6">
                         <label>Упражнение:</label>
-                        <input type="text" name="ExerciseItem.${itemCount}.Title" class="form-control"/>
+                        <input type="text" name="ExerciseItem.${itemCount}.Title" class="form-control" maxLength="60" required/>
                     </div>
                     <div class="form-group col-md-2">
                         <label>Подходы:</label>
-                        <input type="number" name="ExerciseItem.${itemCount}.QuantityApproaches" class="form-control"/>
+                        <input type="number" name="ExerciseItem.${itemCount}.QuantityApproaches" class="form-control" min="1" value="1" required/>
                     </div>
                     <div class="form-group col-md-2">
                         <label>Повторения:</label>
-                        <input type="number" name="ExerciseItem.${itemCount}.QuantityRepetions" class="form-control"/>
+                        <input type="number" name="ExerciseItem.${itemCount}.QuantityRepetions" class="form-control" min="1" value="1" required/>
                     </div>
                     <div class="col-md-2">
-                            <button type="button" onclick="$(this).parent().parent().remove()" class="btn mt-4 btn-danger float-right">
+                        <button type="button" onclick="$(this).parent().parent().remove()" class="btn mt-4 btn-danger float-right">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>

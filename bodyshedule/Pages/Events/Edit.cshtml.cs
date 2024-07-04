@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Diagnostics;
 
 namespace bodyshedule.Pages.Events
 {
@@ -68,12 +69,12 @@ namespace bodyshedule.Pages.Events
                     itemCount++;
                 }
                 _dal.UpdateEvent(form, user, itemsList);
-                TempData["Aler"] = "Success! You modified an getEvent for: " + form["Event.name"];
+              
                 return RedirectToPage("./Index");
             }
             catch (Exception ex)
             {
-                ViewData["Alert"] = "An error occurred: " + ex.Message;
+                Debug.WriteLine("An error occurred: " + ex.Message);
             }
 
             return Page();

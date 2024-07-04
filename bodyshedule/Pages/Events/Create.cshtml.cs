@@ -31,7 +31,7 @@ namespace bodyshedule.Pages.Events
         }
 
         [BindProperty]
-        public Event Event { get; set; } = default!;
+        public Event Event { get; set; }
 
         public async Task<IActionResult> OnPostAsync(IFormCollection form)
         {

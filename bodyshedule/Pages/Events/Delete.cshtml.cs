@@ -26,16 +26,12 @@ namespace bodyshedule.Pages.Events
         }
 
         [BindProperty]
-        public Event Event { get; set; } = default!;
+        public Event Event { get; set; } 
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var getEvent = await _dal.GetEvent((int)id);
-            if (getEvent == null)
+            var getEvent = await _dal.GetEvent(id);
+            if (id == null || getEvent == null)
             {
                 return NotFound();
             }

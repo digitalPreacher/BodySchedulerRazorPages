@@ -8,9 +8,13 @@ namespace bodyshedule.Models
     {
         [Key] 
         public int Id { get; set; }
+        [Required(ErrorMessage = "Это поле является обязательным"), MaxLength(31)]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Это поле является обязательным"), MaxLength(60)]
         public string Description { get; set; }
+        [Required(ErrorMessage = "Это поле является обязательным")]
         public DateTime StartTime { get; set; }
+        [Required(ErrorMessage = "Это поле является обязательным")]
         public DateTime EndTime { get; set; }
 
         public ICollection<ExerciseItem> Items { get; set; } = new List<ExerciseItem>();

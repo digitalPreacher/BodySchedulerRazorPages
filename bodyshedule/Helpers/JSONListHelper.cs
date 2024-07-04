@@ -16,7 +16,8 @@ namespace bodyshedule.Helpers
                     title = modelEvent.Name,
                     description = modelEvent.Description,
                     start = modelEvent.StartTime,
-                    end = modelEvent.EndTime
+                    end = modelEvent.EndTime,
+                    display = "block"
                 };
                 eventList.Add(myEvent);
             }
@@ -32,6 +33,8 @@ namespace bodyshedule.Helpers
         public string description { get; set; }
         public DateTime start { get; set; }
         public DateTime end { get; set; }
+
+        public string display { get; set; }
 
     }
 

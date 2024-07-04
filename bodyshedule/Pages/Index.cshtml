@@ -11,8 +11,15 @@
 
     if (userAuthorized){
         document.addEventListener('DOMContentLoaded', function () {
+            var initialLocaleCode = 'ru';
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                locale: initialLocaleCode,
                 initialView: 'dayGridMonth',
                 events: eventJson,
                 eventClick: function (info) {
@@ -20,7 +27,7 @@
                     var redirectUrl = "/Events/Details?id=" + eventId;
                     
                     window.location.href = redirectUrl;
-                }
+                },
             });
             calendar.render();
         }); 
@@ -29,9 +36,11 @@
 
 </script>
 
-<div class="text-center">
+<div class="container">
     <p>
-        <a asp-page="Events/Create" class="btn btn-primary btn-lg">Добавить тренировку</a>
+        <a asp-page="Events/Create" class="w-100 btn btn-primary btn-lg">Добавить тренировку</a>
     </p>
+</div>
+<div class="container mx-auto">
     <div id="calendar"></div>
 </div>

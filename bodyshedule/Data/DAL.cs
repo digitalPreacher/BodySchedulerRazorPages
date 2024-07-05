@@ -17,6 +17,8 @@ namespace bodyshedule.Data
         public void CreateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
         public void UpdateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
         public void DeleteEvent(int id);
+
+        public List<Exercise> GetExercises();
     }
 
     public class DAL : IDAL
@@ -71,6 +73,11 @@ namespace bodyshedule.Data
             _db.ExerciseItems.RemoveRange(deleteItems);
             _db.Events.Remove(myEvent);
             _db.SaveChanges();
+        }
+
+        public List<Exercise> GetExercises()
+        {
+            return _db.Exercises.ToList();
         }
 
     }

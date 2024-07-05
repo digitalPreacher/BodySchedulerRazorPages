@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace bodyshedule.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,18 +59,16 @@ namespace bodyshedule.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExerciseItems",
+                name: "Exercises",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuantityApproaches = table.Column<int>(type: "int", nullable: false),
-                    QuantityRepetions = table.Column<int>(type: "int", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExerciseItems", x => x.Id);
+                    table.PrimaryKey("PK_Exercises", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,11 +197,10 @@ namespace bodyshedule.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(31)", maxLength: 31, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ItemsId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -215,10 +212,26 @@ namespace bodyshedule.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExerciseItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    QuantityApproaches = table.Column<int>(type: "int", nullable: false),
+                    QuantityRepetions = table.Column<int>(type: "int", nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExerciseItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Events_ExerciseItems_ItemsId",
-                        column: x => x.ItemsId,
-                        principalTable: "ExerciseItems",
+                        name: "FK_ExerciseItems_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -228,8 +241,8 @@ namespace bodyshedule.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "78791b2a-9338-41e5-ac2f-9df273b85e24", null, "admin", "admin" },
-                    { "eb3ec920-8f33-485d-bd0c-c32e0dbfa46f", null, "user", "user" }
+                    { "9b0ff3d4-451d-4766-abd3-8ee5f501d79d", null, "admin", "admin" },
+                    { "9c869149-3608-4d8c-a6f7-21bdce746024", null, "user", "user" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -272,14 +285,14 @@ namespace bodyshedule.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_ItemsId",
-                table: "Events",
-                column: "ItemsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Events_UserId",
                 table: "Events",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseItems_EventId",
+                table: "ExerciseItems",
+                column: "EventId");
         }
 
         /// <inheritdoc />
@@ -301,7 +314,10 @@ namespace bodyshedule.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "ExerciseItems");
+
+            migrationBuilder.DropTable(
+                name: "Exercises");
 
             migrationBuilder.DropTable(
                 name: "IdentityRole");
@@ -310,10 +326,10 @@ namespace bodyshedule.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Events");
 
             migrationBuilder.DropTable(
-                name: "ExerciseItems");
+                name: "AspNetUsers");
         }
     }
 }

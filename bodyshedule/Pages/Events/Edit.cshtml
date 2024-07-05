@@ -63,15 +63,15 @@
                                 <tr class="exercise-item">
 
                                     <td class="col-md-6">
-                                        <input asp-for="@item.Title" name="@($"ExerciseItem.{index}.Title")" class="form-control" />
+                                        <input asp-for="@item.Title" name="@($"ExerciseItem.{index}.Title")" class="form-control"/>
                                         <span asp-validation-for="@item.Title" class="text-danger"></span>
                                     </td>
                                     <td class="col-md-2">
-                                        <input asp-for="@item.QuantityApproaches" name="@($"ExerciseItem.{index}.QuantityApproaches")" class="form-control" />
+                                        <input asp-for="@item.QuantityApproaches" name="@($"ExerciseItem.{index}.QuantityApproaches")" class="form-control" min="1" />
                                         <span asp-validation-for="@item.QuantityApproaches" class="text-danger"></span>
                                     </td>
                                     <td class="col-md-2">
-                                        <input asp-for="@item.QuantityRepetions" name="@($"ExerciseItem.{index}.QuantityRepetions")" class="form-control" />
+                                        <input asp-for="@item.QuantityRepetions" name="@($"ExerciseItem.{index}.QuantityRepetions")" class="form-control" min="1" />
                                         <span asp-validation-for="@item.Title" class="text-danger"></span>
                                     </td>
                                     <td class="col-md-2">

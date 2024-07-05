@@ -76,6 +76,7 @@
         </dl>
         <div class="text-center">
             <a asp-page="./Edit" asp-route-id="@Model.Event?.Id" class="btn mx-2 btn-success"><i class="bi bi-pencil"></i>Редактировать</a>
+            <a asp-page="./Copy" asp-route-id="@Model.Event?.Id" class="btn mx-2 btn-primary"><i class="bi bi-copy"></i>Копировать</a>
             <a asp-page="./Delete" asp-route-id="@Model.Event?.Id" class="btn mx-2 btn-danger"><i class="bi bi-trash"></i>Удалить</a>
             <button onclick="window.history.back()" class="btn mx-2 btn-primary"><i class="bi bi-reply"></i>Назад</button>
         </div>

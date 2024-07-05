@@ -1,0 +1,128 @@
+﻿@page
+@model bodyshedule.Pages.Events.CopyModel
+@{
+}
+@{
+    ViewData["Title"] = "Copy";
+}
+
+<div class="container">
+    <div class="col-lg-8 mx-auto text-center rounded border p-3">
+        <h1>Копирование тренировки</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-8 mx-auto rounded border p-3">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Event.Id" />
+            <div class="row text-center">
+                <div class="form-group col-md-6">
+                    <label asp-for="Event.Name" class="control-label">Название</label>
+                    <input asp-for="Event.Name" class="form-control" />
+                    <span asp-validation-for="Event.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Event.StartTime" class="control-label">Начало</label>
+                    <input asp-for="Event.StartTime" class="form-control" />
+                    <span asp-validation-for="Event.StartTime" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Event.EndTime" class="control-label">Завершение</label>
+                    <input asp-for="Event.EndTime" class="form-control" />
+                    <span asp-validation-for="Event.EndTime" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Event.Description" class="control-label">Описание</label>
+                    <input asp-for="Event.Description" class="form-control" />
+                    <span asp-validation-for="Event.Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="text-center row col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Упражнения
+                            </th>
+                            <th>
+                                Подходы
+                            </th>
+                            <th>
+                                Повторения
+                            </th>
+                            <th>
+                                Удаление
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="exerciseItemsContainer">
+                        @foreach ((var item, int index) in Model.Event.Items.Select((item, index) => (item, index)))
+                        {
+                            <tr class="exercise-item">
+
+                                <td class="col-md-6">
+                                    <input asp-for="@item.Title" name="@($"ExerciseItem.{index}.Title")" class="form-control" />
+                                    <span asp-validation-for="@item.Title" class="text-danger"></span>
+                                </td>
+                                <td class="col-md-2">
+                                    <input asp-for="@item.QuantityApproaches" name="@($"ExerciseItem.{index}.QuantityApproaches")" class="form-control" />
+                                    <span asp-validation-for="@item.QuantityApproaches" class="text-danger"></span>
+                                </td>
+                                <td class="col-md-2">
+                                    <input asp-for="@item.QuantityRepetions" name="@($"ExerciseItem.{index}.QuantityRepetions")" class="form-control" />
+                                    <span asp-validation-for="@item.Title" class="text-danger"></span>
+                                </td>
+                                <td class="col-md-2">
+                                    <button type="button" onclick="$(this).parent().parent().remove()" class="btn btn-danger float-right">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <button type="button" onclick="addExerciseItem()" class="w-100 btn btn-lg btn-primary">Добавить упражнение</button>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="w-100 btn mt-2 btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function addExerciseItem() {
+            var container = $("#exerciseItemsContainer");
+            var itemCount = container.children().length; // Get current count
+
+            var newItem = `
+                            <tr class="exercise-item">
+                                <td class="col-md-6">
+                                    <input type="text" name="ExerciseItem.${itemCount}.Title" class="form-control" maxLength="60" required/>
+                                </td>
+                                <td class="col-md-2">
+                                    <input type="number" name="ExerciseItem.${itemCount}.QuantityApproaches" class="form-control" min="1" value="1" required/>
+                                </td>
+                                <td class="col-md-2">
+                                    <input type="number" name="ExerciseItem.${itemCount}.QuantityRepetions" class="form-control" min="1" value="1" required/>
+                                </td>
+                                <td class="col-md-2">
+                                    <button type="button" onclick="$(this).parent().parent().remove()" class="btn btn-danger float-right">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>`;
+            container.append(newItem);
+        }
+    </script>
+}

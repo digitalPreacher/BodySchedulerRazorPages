@@ -23,6 +23,7 @@ namespace bodyshedule.Pages.Events
         {
             _dal = dal;
             _userManager = userManager;
+            ExerciseList = GetExerciseList();
         }
 
         public  IActionResult OnGet()
@@ -32,6 +33,8 @@ namespace bodyshedule.Pages.Events
 
         [BindProperty]
         public Event Event { get; set; }
+
+        public List<string> ExerciseList {  get; set; }
 
         public async Task<IActionResult> OnPostAsync(IFormCollection form)
         {
@@ -52,6 +55,17 @@ namespace bodyshedule.Pages.Events
             _dal.CreateEvent(form, user, itemsList);
 
             return RedirectToPage("./Index");
+        }
+        public List<string> GetExerciseList()
+        {
+            // Replace this with your actual logic to retrieve data from the database
+            // This is an example assuming you have a table with "ExerciseName" values
+            List<string> exercises = new List<string>();
+            exercises.Add("Push-ups");
+            exercises.Add("Squats");
+            exercises.Add("Lunges");
+            exercises.Add("Deadlifts");
+            return exercises;
         }
 
     }

@@ -20,3 +20,30 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.ui-autocomplete {
+    /* Style the autocomplete container */
+    max-width: 395px; /* Adjust width as needed */
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.ui-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-menu-item {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.ui-menu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.ui-helper-hidden-accessible{
+    display: none;
+}

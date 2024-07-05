@@ -18,6 +18,8 @@ namespace bodyshedule.Pages.Events
             _dal = dal;
             _userManager = userManager;
         }
+
+        public List<string> ExerciseList { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)
         {
 
@@ -31,6 +33,15 @@ namespace bodyshedule.Pages.Events
             {
                 Event = getEvent; ;
             }
+
+            var exerciseList = _dal.GetExercises();
+            List<string> exercises = new List<string>();
+            foreach (var item in exerciseList)
+            {
+                exercises.Add(item.Title);
+            }
+
+            ExerciseList = exercises;
 
             return Page();
 

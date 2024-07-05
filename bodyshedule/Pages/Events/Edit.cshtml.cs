@@ -53,7 +53,7 @@ namespace bodyshedule.Pages.Events
         public async Task<IActionResult> OnPostAsync(IFormCollection form)
         {
             var user = await _userManager.GetUserAsync(User);
-            
+
             try
             {
                 var itemsList = new List<ExerciseItem>();
@@ -69,7 +69,7 @@ namespace bodyshedule.Pages.Events
                     itemCount++;
                 }
                 _dal.UpdateEvent(form, user, itemsList);
-              
+
                 return RedirectToPage("./Index");
             }
             catch (Exception ex)

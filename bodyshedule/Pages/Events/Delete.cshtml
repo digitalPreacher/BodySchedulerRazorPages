@@ -6,13 +6,14 @@
 }
 
 <div class="container">
-    <div class="col-lg-8 mx-auto text-center rounded border p-3">
+    <div class="col-lg-8 mx-auto text-center p-3">
         <h1>Удаление тренировки</h1>
         <h4>Вы действительно хотите сделать это?</h4>
+        <hr />
     </div>
 </div>
 <div class="container">
-    <div class="col-lg-8 mx-auto rounded border p-3">
+    <div class="col-lg-8 mx-auto rounded border border-5 p-3">
         <dl class="row text-center">
             <dt class="col-sm-12">
                 <label class="control-label">Название</label>
@@ -78,7 +79,7 @@
             <div class="d-inline-flex">
                 <form method="post">
                     <input type="hidden" asp-for="Event.Id" />
-                    <input type="submit" value="Удалить" class="btn btn-danger" />
+                    <input type="submit" value="Удалить" class="btn btn-danger"/>
                 </form>
                 <button onclick="window.history.back()" class="btn mx-2 btn-primary"><i class="bi bi-reply"></i>Назад</button>
             </div>

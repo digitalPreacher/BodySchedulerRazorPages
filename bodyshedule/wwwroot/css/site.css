@@ -17,9 +17,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
 
 .ui-autocomplete {
     /* Style the autocomplete container */
@@ -38,6 +35,7 @@ body {
     padding: 5px;
     cursor: pointer;
     background-color: #fff;
+    color: #000000;
 }
 
 .ui-menu-item:hover {
@@ -46,4 +44,60 @@ body {
 
 .ui-helper-hidden-accessible{
     display: none;
+}
+
+body {
+    color: #fff;
+    background-image: linear-gradient(to right, #020024, #790978);
+    margin-bottom: 60px;
+}
+
+/*
+element.style {
+    border-color: rgb(186, 54, 188);
+    background-color: rgb(186, 54, 188);
+}
+*/
+.container .navbar-brand {
+    color: #fff;
+}
+
+.container .table {
+    color: #fff;
+}
+
+.fc-daygrid-day-number, .fc-toolbar-title, .fc-col-header-cell-cushion {
+    color: #fff;
+}
+
+.my-btn {
+    background-color: #6c48bc;
+    /*background-image: linear-gradient(to right, #ac4386, #1d7293);*/
+    color: #fff;
+}
+
+.limit-text {
+    white-space: nowrap; /* Prevent wrapping of text */
+    overflow: hidden; /* Hide content that overflows */
+    text-overflow: ellipsis; /* Add ellipsis (...) at the end */
+    max-width: 15px; /* Set the maximum width for the cell content */
+}
+
+.fc-event-main .fc-event-title {    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: auto;
+}
+
+.fc-h-event .fc-event-time {
+    overflow: inherit;
+}
+
+:root {
+    --fc-border-color: black;
+    --fc-daygrid-event-dot-width: 5px;
+    --fc-button-text-color: #fff;
+    --fc-more-link-text-color: #ff0000;
+    --fc-today-bg-color: #790978;
 }

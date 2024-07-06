@@ -7,13 +7,14 @@
 }
 
 <div class="container">
-    <div class="col-lg-8 mx-auto text-center rounded border p-3">
+    <div class="col-lg-8 mx-auto text-center p-3">
         <h1>Редактирование тренировки</h1>
+        <hr />
     </div>
 </div>
 
 <div class="container">
-    <div class="col-md-8 mx-auto rounded border p-3">
+    <div class="col-md-8 mx-auto rounded border border-5 p-3">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Event.Id" />
@@ -142,5 +143,4 @@
             container.append(newItem);
         }
     </script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" crossorigin="anonymous"></script>
 }

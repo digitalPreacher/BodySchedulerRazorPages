@@ -42,10 +42,10 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
+                    @Html.DisplayFor(modelItem => item.StartTime.LocalDateTime)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
+                     @Html.DisplayFor(modelItem => item.EndTime.LocalDateTime)
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a> |

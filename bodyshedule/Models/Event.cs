@@ -17,11 +17,11 @@ namespace bodyshedule.Models
 
         [DisplayFormat(DataFormatString = "{0:dd/MM H:mm}")]
         [Required(ErrorMessage = "Это поле является обязательным")]
-        public DateTime StartTime { get; set; }
+        public DateTimeOffset StartTime { get; set; } = DateTimeOffset.Now;
 
         [DisplayFormat(DataFormatString = "{0:dd/MM H:mm}")]
         [Required(ErrorMessage = "Это поле является обязательным")]
-        public DateTime EndTime { get; set; }
+        public DateTimeOffset EndTime { get; set; } = DateTimeOffset.Now;
 
         public ICollection<ExerciseItem> Items { get; set; } = new List<ExerciseItem>();
         public virtual ApplicationUser User { get; set; }
@@ -32,8 +32,8 @@ namespace bodyshedule.Models
             Items = itemList;
             Name = form["Event.name"].ToString();
             Description = form["Event.description"].ToString();
-            StartTime = DateTime.Parse(form["Event.StartTime"].ToString());
-            EndTime = DateTime.Parse(form["Event.EndTime"].ToString());
+            StartTime = DateTimeOffset.Parse(form["Event.StartTime.LocalDateTime"].ToString()).ToUniversalTime();
+            EndTime = DateTimeOffset.Parse(form["Event.EndTime.LocalDateTime"].ToString()).ToUniversalTime();
         }
 
         public void UpdateEvent(IFormCollection form, ApplicationUser user, ICollection<ExerciseItem> itemList) //Location location
@@ -42,8 +42,8 @@ namespace bodyshedule.Models
             Items = itemList;
             Name = form["Event.name"].ToString();
             Description = form["Event.description"].ToString();
-            StartTime = DateTime.Parse(form["Event.StartTime"].ToString());
-            EndTime = DateTime.Parse(form["Event.EndTime"].ToString());
+            StartTime = DateTimeOffset.Parse(form["Event.StartTime.LocalDateTime"].ToString()).ToUniversalTime();
+            EndTime = DateTimeOffset.Parse(form["Event.EndTime.LocalDateTime"].ToString()).ToUniversalTime();
         }
 
         public Event()

@@ -31,13 +31,13 @@
                 <label class="control-label">Начало</label>
             </dt>
             <dd class="col-sm-12">
-                @Html.DisplayFor(model => model.Event.StartTime)
+                @Html.DisplayFor(model => model.Event.StartTime.LocalDateTime)
             </dd>
             <dt class="col-sm-12">
                 <label class="control-label">Завершение</label>
             </dt>
             <dd class="col-sm-12">
-                @Html.DisplayFor(model => model.Event.EndTime)
+                @Html.DisplayFor(model => model.Event.EndTime.LocalDateTime)
             </dd>
             @if (Model.Event.Items?.Any() ?? false)
             {

@@ -125,7 +125,7 @@ namespace bodyshedule.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     UserName = Input.Email,
                     Email = Input.Email,
-                    CreateAt = DateTime.Now,
+                    CreateAt = DateTimeOffset.Now.ToUniversalTime(),
                    
                 };
 

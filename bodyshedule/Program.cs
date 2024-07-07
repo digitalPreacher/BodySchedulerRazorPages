@@ -10,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("test") ?? throw new InvalidOperationException("Connection string 'RazorPagesLearningContext' not found.")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("postgresql")
+        ?? throw new InvalidOperationException("Connection string 'postgresql' not found.")));
 
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)

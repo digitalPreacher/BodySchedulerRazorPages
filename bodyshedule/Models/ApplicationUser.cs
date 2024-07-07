@@ -11,7 +11,11 @@ namespace bodyshedule.Models
         public string LastName { get; set; } = string.Empty;
 
         public string Address { get; set; } = string.Empty;
+        public DateTimeOffset CreateAt { get; set; } = DateTimeOffset.Now;
+        //{
+        //    get { return DateTimeOffset.Now; }
+        //    set { value.ToUniversalTime(); }
+        //}
 
-        public DateTime CreateAt { get; set; }
     }
 }

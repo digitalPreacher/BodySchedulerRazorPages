@@ -38,7 +38,7 @@ namespace bodyshedule.Data
 
         public List<Event> GetMyEvents(int userid)
         {
-            return _db.Events.OrderBy(x => x.Id).Where(x => x.User.Id == userid).ToList();
+            return _db.Events.OrderByDescending(x => x.Id).Where(x => x.User.Id == userid).ToList();
         }
 
         public Task<Event> GetEvent(int id)

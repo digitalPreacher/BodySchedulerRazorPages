@@ -6,10 +6,8 @@
 }
 
 
-
 <div class="container">
     <h1 class="text-center">Мои тренировки</h1>
-
     <div class="d-inline-flex">
         <a asp-page="Create" class="btn btn-primary">Добавить</a>
         <a asp-page="../Index" class="btn mx-2 btn-primary"><i class="bi bi-reply"></i>Назад</a>
@@ -57,4 +55,12 @@
         }
         </tbody>
     </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item" onclick="ActiveXObject"> <a class="page-link" href="@Url.Page("Index", new { pageNumber = i })">@i</a></li>
+            }
+        </ul>
+    </nav>
 </div>

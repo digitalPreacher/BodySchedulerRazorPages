@@ -52,12 +52,6 @@ body {
     margin-bottom: 60px;
 }
 
-/*
-element.style {
-    border-color: rgb(186, 54, 188);
-    background-color: rgb(186, 54, 188);
-}
-*/
 .container .navbar-brand {
     color: #fff;
 }
@@ -70,11 +64,13 @@ element.style {
     color: #fff;
 }
 
+/*add exercise button on main page*/
 .my-btn {
     background-color: #6c48bc;
-    /*background-image: linear-gradient(to right, #ac4386, #1d7293);*/
     color: #fff;
 }
+
+/*fullcalendar*/
 
 .limit-text {
     white-space: nowrap; /* Prevent wrapping of text */
@@ -100,4 +96,10 @@ element.style {
     --fc-button-text-color: #fff;
     --fc-more-link-text-color: #ff0000;
     --fc-today-bg-color: #790978;
+}
+
+/*pagination*/
+.page-item .page-link {
+    background-color: transparent;
+    color: white;
 }

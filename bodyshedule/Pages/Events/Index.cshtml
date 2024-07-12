@@ -9,9 +9,29 @@
 <div class="container">
     <h1 class="text-center">Мои тренировки</h1>
     <div class="d-inline-flex">
-        <a asp-page="Create" class="btn btn-primary">Добавить</a>
-        <a asp-page="../Index" class="btn mx-2 btn-primary"><i class="bi bi-reply"></i>Назад</a>
+        <a asp-page="Create" class="btn btn-primary mx-2">Добавить</a>
+
+        <form method="get" class="d-inline-flex mx-auto">
+            @if (Model.IsFilterActive)
+            {
+                <input class="form-control bg-transparent text-white" asp-for="FilterStartDateTime" asp-format="{0:yyyy-MM-ddTHH:mm}" name="startDateTime" />
+                <input class="form-control mx-2 bg-transparent text-white" asp-for="FilterEndDateTime" asp-format="{0:yyyy-MM-ddTHH:mm}" name="endDateTime" />
+            }
+            else
+            {
+                <input class="form-control bg-transparent text-white" asp-for="FilterStartDateTime" asp-format="{0:yyyy-MM-dd}" name="startDateTime" />
+                <input class="form-control mx-2 bg-transparent text-white" asp-for="FilterEndDateTime" asp-format="{0:yyyy-MM-dd}" name="endDateTime" />
+            }
+            <input hidden name="isFilterActive" value="true" />
+            <button type="submit" class="btn btn-primary text-center">Применить</button>
+        </form>
+        <form method="get" class="d-inline-flex">
+            <input hidden name="isFilterActive" value="false" />
+            <button type="submit" class="btn btn-primary text-center mx-2">Сбросить</button>
+        </form>
+        <a asp-page="../Index" class="btn mx-auto btn-primary"><i class="bi bi-reply"></i>Назад</a>
     </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -40,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartTime.LocalDateTime)
+                     @Html.DisplayFor(modelItem => item.StartTime.LocalDateTime)
                 </td>
                 <td>
                      @Html.DisplayFor(modelItem => item.EndTime.LocalDateTime)
@@ -57,9 +77,19 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            @for (int i = 1; i <= Model.TotalPages; i++)
+            @if (!Model.IsFilterActive)
             {
-                <li class="page-item" onclick="ActiveXObject"> <a class="page-link" href="@Url.Page("Index", new { pageNumber = i })">@i</a></li>
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item" onclick="ActiveXObject"> <a class="page-link" href="@Url.Page("Index", new { pageNumber = i, isFilterActive = false })">@i</a></li>
+                }
+            }
+            else
+            {
+                @for (int i = 1; i <= Model.FilterTotalPage; i++)
+                {
+                    <li class="page-item" onclick="ActiveXObject"> <a class="page-link" href="@Url.Page("Index", new { pageNumber = i, startDateTime = Model.FilterStartDateTime, endDateTime = Model.FilterEndDateTime, isFilterActive = Model.IsFilterActive })">@i</a></li>
+                }
             }
         </ul>
     </nav>

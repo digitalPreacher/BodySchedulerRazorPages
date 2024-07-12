@@ -15,13 +15,11 @@ namespace bodyshedule.Models
         [Required(ErrorMessage = "Это поле является обязательным"), MaxLength(60)]
         public string Description { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM H:mm}")]
         [Required(ErrorMessage = "Это поле является обязательным")]
-        public DateTimeOffset StartTime { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset StartTime { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM H:mm}")]
         [Required(ErrorMessage = "Это поле является обязательным")]
-        public DateTimeOffset EndTime { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset EndTime { get; set; }
 
         public ICollection<ExerciseItem> Items { get; set; } = new List<ExerciseItem>();
         public virtual ApplicationUser User { get; set; }

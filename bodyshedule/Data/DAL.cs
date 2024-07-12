@@ -13,7 +13,11 @@ namespace bodyshedule.Data
     {
         public List<Event> GetEvents();
         public List<Event> GetMyEvents(int userid);
+
+        public IQueryable<Event> GetMyFilteringEvents(int userid, DateTimeOffset startDateTime,
+            DateTimeOffset endDateTime);
         public Task<Event> GetEvent(int id);
+
         public void CreateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
         public void UpdateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
         public void DeleteEvent(int id);
@@ -40,6 +44,13 @@ namespace bodyshedule.Data
         {
             return _db.Events.OrderByDescending(x => x.Id).Where(x => x.User.Id == userid).ToList();
         }
+
+        public IQueryable<Event> GetMyFilteringEvents(int userid, DateTimeOffset startDateTime,
+            DateTimeOffset endDateTime)
+        {
+            return _db.Events.Where(x => x.StartTime >= startDateTime && x.EndTime <= endDateTime && x.User.Id == userid);
+        }
+
 
         public Task<Event> GetEvent(int id)
         {

@@ -29,7 +29,31 @@
             <input hidden name="isFilterActive" value="false" />
             <button type="submit" class="btn btn-primary text-center mx-2">Сбросить</button>
         </form>
-        <a asp-page="../Index" class="btn mx-auto btn-primary"><i class="bi bi-reply"></i>Назад</a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteAllEvents">
+            Удалить все
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteAllEvents" tabindex="-1" aria-labelledby="deleteAllEventsLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-dark" id="deleteAllEventsLabel">Удаление всех тренировок</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-dark">
+                        Вы действительно хотите сделать это?
+                    </div>
+                    <div class="modal-footer">
+                        <form asp-page-handler="DeleteAll" method="post">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a asp-page="../Index" class="btn mx-2 btn-primary"><i class="bi bi-reply"></i>Назад</a>
     </div>
 
     <table class="table">

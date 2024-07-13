@@ -27,7 +27,6 @@ namespace bodyshedule.Pages.Events
             _userManager = userManager;
         }
 
-
         public IList<Event> Event { get; set; } = default!;
 
         private DateTime _minDate = DateTime.MinValue;
@@ -125,6 +124,14 @@ namespace bodyshedule.Pages.Events
             }
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostDeleteAll()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            _dal.DeleteMyEvents(user.Id);
+
+            return RedirectToPage("./Index");
         }
     }
 }

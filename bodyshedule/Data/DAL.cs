@@ -22,6 +22,8 @@ namespace bodyshedule.Data
         public void UpdateEvent(IFormCollection form, ApplicationUser appUser, List<ExerciseItem> newItems);
         public void DeleteEvent(int id);
 
+        public void DeleteMyEvents(int userId);
+
         public List<Exercise> GetExercises();
     }
 
@@ -86,12 +88,19 @@ namespace bodyshedule.Data
             _db.SaveChanges();
         }
 
+        public void DeleteMyEvents(int userId)
+        {
+            var myEvents = _db.Events.Where(x => x.User.Id == userId);
+            var myItems = myEvents.SelectMany(x => x.Items.Select(x => x.Id));
+            var deleteItems = _db.ExerciseItems.Where(item => myItems.Contains(item.Id));
+            _db.ExerciseItems.RemoveRange(deleteItems);
+            _db.Events.RemoveRange(myEvents);
+            _db.SaveChanges();
+        }
+
         public List<Exercise> GetExercises()
         {
             return _db.Exercises.ToList();
         }
-
     }
-
-
 }

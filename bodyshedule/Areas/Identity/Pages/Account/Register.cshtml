@@ -1,23 +1,23 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Регистрация";
 }
 
 <div class="row">
-    <div class="col-lg-6 mx-auto rounded border p-3">
-        <h2 class="text-center mb-3">Register</h2>
+    <div class="col-lg-4 mx-auto rounded border border-5 p-3">
+        <h2 class="text-center mb-3">@ViewData["Title"]</h2>
         <hr />
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="text-secondary">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" autocomplete="first-name" aria-required="true" placeholder="first name" />
-                <label asp-for="Input.FirstName">First Name</label>
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="first-name" aria-required="true" placeholder="Имя" />
+                <label asp-for="Input.FirstName">Имя</label>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" autocomplete="last-name" aria-required="true" placeholder="first name" />
-                <label asp-for="Input.LastName">Last Name</label>
+                <input asp-for="Input.LastName" class="form-control" autocomplete="last-name" aria-required="true" placeholder="Фамилия" />
+                <label asp-for="Input.LastName">Фамилия</label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
@@ -26,16 +26,21 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
+                <input asp-for="Input.SecretWord" class="form-control" autocomplete="username" aria-required="true" placeholder="Придумайте секретное слово(необходимо для сброса пароля)" />
+                <label asp-for="Input.SecretWord">Секретное слово для восстановления доступа</label>
+                <span asp-validation-for="Input.SecretWord" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Пароль" />
+                <label asp-for="Input.Password">Пароль</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Подтвержение пароля" />
+                <label asp-for="Input.ConfirmPassword">Подтвержение пароля</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Регистрация</button>
         </form>
     </div>
 </div>

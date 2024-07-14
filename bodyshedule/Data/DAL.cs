@@ -25,6 +25,8 @@ namespace bodyshedule.Data
         public void DeleteMyEvents(int userId);
 
         public List<Exercise> GetExercises();
+
+        public bool CheckUser(int userId, string secretWord);
     }
 
     public class DAL : IDAL
@@ -101,6 +103,20 @@ namespace bodyshedule.Data
         public List<Exercise> GetExercises()
         {
             return _db.Exercises.ToList();
+        }
+
+        public bool CheckUser(int userId, string secretWord)
+        {
+            var user = _db.Users.FirstOrDefault(x => x.Id == userId);
+            var userSecretWord = user.SecretWord;
+            if (userSecretWord == secretWord)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
         }
     }
 }

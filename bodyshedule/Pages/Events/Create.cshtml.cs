@@ -68,8 +68,7 @@ namespace bodyshedule.Pages.Events
         public List<string> GetExerciseList()
         {
             var exerciseList = _dal.GetExercises();
-            // Replace this with your actual logic to retrieve data from the database
-            // This is an example assuming you have a table with "ExerciseName" values
+
             List<string> exercises = new List<string>();
             foreach (var item in exerciseList)
             {

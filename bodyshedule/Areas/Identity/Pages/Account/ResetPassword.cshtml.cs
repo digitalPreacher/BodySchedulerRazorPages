@@ -31,6 +31,7 @@ namespace bodyshedule.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required(ErrorMessage = "Поле обязательно для заполнения")]
+            [HiddenInput]
             [EmailAddress]
             public string Email { get; set; }
 

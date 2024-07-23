@@ -10,4 +10,4 @@ services:
       - ConnectionStrings__Default=Host=postgresql;Username=postgres;Port=5432;Password=Admin666!;Database=MyBody;Pooling=true;
     ports:
       - "80:80"
-  
+      - "443:443"
